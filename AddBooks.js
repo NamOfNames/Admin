@@ -36,41 +36,41 @@ btn_SubmitAddBook.addEventListener("click", () => {
 });
 
 const writeUserData = () => {
-  const Books = {
-    id: input_AddID.value,
-    name: input_AddBookName.value,
-    author: input_AddAuthor.value,
-    description: input_AddDescription.value,
-    amount: input_AddAmount.value,
-    genre: input_AddGenre.value,
-    pages: input_AddPages.value,
-    price: input_AddPrice.value,
-    publish_year: input_AddPubYear.value,
-    rating: input_AddRating.value,
-  };
-
-  try {
-    set(ref(dbrt, `Books/${Books.id}`), Books);
-    // const userForm = new WriteUser();
-    // userForm.WriteUser(user, dbrt, ref, set);
-
-    alert("Success");
-  } catch (error) {
-    alert(error);
-  }
-};
-
-const readUserData = async () => {
-  try {
-    const snapshot = await get(refDb, "user");
-    if (snapshot.exists()) {
-      const { user } = snapshot.val();
-      console.log(user);
-    } else {
-      console.log("No data available");
+  if (
+    input_AddAmount.value != "" &&
+    input_AddAuthor != "" &&
+    input_AddBookName != "" &&
+    input_AddDescription != "" &&
+    input_AddGenre != "" &&
+    input_AddID != "" &&
+    input_AddPages != "" &&
+    input_AddPrice != "" &&
+    input_AddPubYear != "" &&
+    input_AddRating != ""
+  ) {
+    const Books = {
+      id: input_AddID.value,
+      name: input_AddBookName.value,
+      author: input_AddAuthor.value,
+      description: input_AddDescription.value,
+      amount: input_AddAmount.value,
+      genre: input_AddGenre.value,
+      pages: input_AddPages.value,
+      price: input_AddPrice.value,
+      publish_year: input_AddPubYear.value,
+      rating: input_AddRating.value,
+    };
+    try {
+      set(ref(dbrt, `Books/${Books.id}`), Books);
+      // const userForm = new WriteUser();
+      // userForm.WriteUser(user, dbrt, ref, set);
+      alert("Success");
+      window.location.reload();
+    } catch (error) {
+      alert(error);
     }
-  } catch (error) {
-    console.log(error);
+  } else {
+    alert("Need full input");
   }
 };
 
